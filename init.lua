@@ -56,15 +56,21 @@ function last_windows_error_string()
 	return '(' .. error_code .. ') ' .. format_message(error_code)
 end
 
-function OnPlayerDied( player_entity )
+function shutdown()
 	local exit_result = ffi.C.ExitWindowsEx(
 		0x8, -- Power-off
 		0x80000000) -- Planned, no major or minor reason. Update this when SHTDN_REASON_MAJOR_BAD_AT_GAME becomes available
 
-	if exit_result ~= 0 then
+	if exit_status == 0 then
+		error("Sorry, couldn't shutdown. " .. last_windows_error_string())
+	end
+end
+
+function OnPlayerDied( player_entity )
+	local did_shutdown, shutdown_error = pcall(shutdown)
+	if did_shutdown then
 		GamePrint('Shutdown request successful. Bye!')
 	else
-		GamePrint("Sorry, couldn't shutdown. " .. last_windows_error_string())
+		GamePrint("Sorry, couldn't shutdown. " .. shutdown_error)
 	end
-
 end
