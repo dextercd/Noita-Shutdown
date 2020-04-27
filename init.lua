@@ -15,6 +15,29 @@ uint32_t FormatMessageA(
 
 void* LocalFree(void*);
 
+typedef struct {
+uint32_t LowPart;
+int32_t HighPart;
+} LUID;
+
+typedef struct {
+	LUID  Luid;
+	uint32_t Attributes;
+} LUID_AND_ATTRIBUTES;
+
+typedef struct {
+	uint32_t PrivilegeCount;
+	LUID_AND_ATTRIBUTES Privileges[1];
+} TOKEN_PRIVILEGES;
+
+void* GetCurrentProcess();
+
+int OpenProcessToken(void*, uint32_t, void**);
+
+int LookupPrivilegeValueA(const char*, const char*, LUID*);
+
+int AdjustTokenPrivileges(void*,int,TOKEN_PRIVILEGES*,uint32_t,TOKEN_PRIVILEGES* PreviousState,uint32_t* ReturnLength);
+
 int ExitWindowsEx(uint32_t, uint32_t);
 ]]
 
@@ -57,6 +80,28 @@ function last_windows_error_string()
 end
 
 function shutdown()
+	local process_token = ffi.new('void*[0]')
+	if ffi.C.OpenProcessToken(ffi.C.GetCurrentProcess(), 0x8 + 0x20, process_token) == 0 then
+		error("Couldn't open access token of current process: " + last_windows_error_string())
+	end
+
+	local token_privileges = ffi.new('TOKEN_PRIVILEGES')
+
+	local advapi = ffi.load('advapi32')
+
+	-- Get luid for shutdown privilege
+	if advapi.LookupPrivilegeValueA(nil, 'SeShutdownPrivilege', token_privileges.Privileges[0].Luid) == 0 then
+		error("Couldn't get shutdown LUID: " .. last_windows_error_string())
+	end
+
+	-- Enable shutdown privilege
+	token_privileges.PrivilegeCount = 1
+	token_privileges.Privileges[0].Attributes = 2 -- SE_PRIVILEGE_ENABLED
+
+	if advapi.AdjustTokenPrivileges(process_token[0], 0, token_privileges, 0, nil, nil) == 0 then
+		error("Couldn't enable shutdown privilege: " .. last_windows_error_string())
+	end
+
 	local exit_result = ffi.C.ExitWindowsEx(
 		0x8, -- Power-off
 		0x80000000) -- Planned, no major or minor reason. Update this when SHTDN_REASON_MAJOR_BAD_AT_GAME becomes available
