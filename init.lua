@@ -62,7 +62,7 @@ function shutdown()
 		0x80000000) -- Planned, no major or minor reason. Update this when SHTDN_REASON_MAJOR_BAD_AT_GAME becomes available
 
 	if exit_status == 0 then
-		error("Sorry, couldn't shutdown. " .. last_windows_error_string())
+		error('Shutdown request failed: ' .. last_windows_error_string())
 	end
 end
 
