@@ -57,7 +57,9 @@ function last_windows_error_string()
 end
 
 function OnPlayerDied( player_entity )
-	local exit_result = ffi.C.ExitWindowsEx(0x8, 0x80000000)
+	local exit_result = ffi.C.ExitWindowsEx(
+		0x8, -- Power-off
+		0x80000000) -- Planned, no major or minor reason. Update this when SHTDN_REASON_MAJOR_BAD_AT_GAME becomes available
 
 	if exit_result ~= 0 then
 		GamePrint('Shutdown request successful. Bye!')
