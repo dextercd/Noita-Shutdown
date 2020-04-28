@@ -111,6 +111,10 @@ function shutdown()
 	end
 end
 
+function OnPlayerSpawned( player_entity )
+	GamePrint("Warning, shutdown mod is enabled. Please make sure you've saved all open documents, unsaved changes may be lost.")
+end
+
 function OnPlayerDied( player_entity )
 	local did_shutdown, shutdown_error = pcall(shutdown)
 	if did_shutdown then
