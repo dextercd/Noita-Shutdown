@@ -80,14 +80,14 @@ function last_windows_error_string()
 end
 
 function shutdown()
+	local advapi = ffi.load('advapi32')
+
 	local process_token = ffi.new('void*[0]')
-	if ffi.C.OpenProcessToken(ffi.C.GetCurrentProcess(), 0x8 + 0x20, process_token) == 0 then
+	if advapi.OpenProcessToken(ffi.C.GetCurrentProcess(), 0x8 + 0x20, process_token) == 0 then
 		error("Couldn't open access token of current process: " + last_windows_error_string())
 	end
 
 	local token_privileges = ffi.new('TOKEN_PRIVILEGES')
-
-	local advapi = ffi.load('advapi32')
 
 	-- Get luid for shutdown privilege
 	if advapi.LookupPrivilegeValueA(nil, 'SeShutdownPrivilege', token_privileges.Privileges[0].Luid) == 0 then
