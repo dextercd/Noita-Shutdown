@@ -16,8 +16,8 @@ uint32_t FormatMessageA(
 void* LocalFree(void*);
 
 typedef struct {
-uint32_t LowPart;
-int32_t HighPart;
+	uint32_t LowPart;
+	int32_t HighPart;
 } LUID;
 
 typedef struct {
@@ -111,11 +111,11 @@ function shutdown()
 	end
 end
 
-function OnPlayerSpawned( player_entity )
+function OnPlayerSpawned(player_entity)
 	GamePrint("Warning, shutdown mod is enabled. Please make sure you've saved all open documents, unsaved changes may be lost.")
 end
 
-function OnPlayerDied( player_entity )
+function OnPlayerDied(player_entity)
 	local did_shutdown, shutdown_error = pcall(shutdown)
 	if did_shutdown then
 		GamePrint('Shutdown request successful. Bye!')
