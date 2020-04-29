@@ -116,11 +116,17 @@ function OnPlayerSpawned(player_entity)
 	EntityLoad('mods/Noita-Shutdown/warning_text.xml')
 end
 
+function did_win()
+	return GameHasFlagRun('ending_game_completed')
+end
+
 function OnPlayerDied(player_entity)
-	local did_shutdown, shutdown_error = pcall(shutdown)
-	if did_shutdown then
-		GamePrint('Shutdown request successful. Bye!')
-	else
-		GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually. Error:" .. shutdown_error)
+	if not did_win() then
+		local did_shutdown, shutdown_error = pcall(shutdown)
+		if did_shutdown then
+			GamePrint('Shutdown request successful. Bye!')
+		else
+			GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually. Error:" .. shutdown_error)
+		end
 	end
 end
