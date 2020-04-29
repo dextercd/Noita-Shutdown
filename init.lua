@@ -10,10 +10,10 @@ uint32_t FormatMessageA(
 	uint32_t dwLanguageId,
 	char* lpBuffer,
 	uint32_t nSize,
-	va_list *Arguments
+	va_list* Arguments
 );
 
-void* LocalFree(void*);
+void* LocalFree(void* hMem);
 
 typedef struct {
 	uint32_t LowPart;
@@ -30,15 +30,27 @@ typedef struct {
 	LUID_AND_ATTRIBUTES Privileges[1];
 } TOKEN_PRIVILEGES;
 
-void* GetCurrentProcess();
+void* GetCurrentProcess(void);
 
-int OpenProcessToken(void*, uint32_t, void**);
+int OpenProcessToken(
+	void* ProcessHandle,
+	uint32_t DesiredAccess,
+	void** TokenHandle);
 
-int LookupPrivilegeValueA(const char*, const char*, LUID*);
+int LookupPrivilegeValueA(
+	const char* lpSystemName,
+	const char* lpName,
+	LUID* lpLuid);
 
-int AdjustTokenPrivileges(void*,int,TOKEN_PRIVILEGES*,uint32_t,TOKEN_PRIVILEGES* PreviousState,uint32_t* ReturnLength);
+int AdjustTokenPrivileges(
+	void* TokenHandle,
+	int DisableAllPrivileges,
+	TOKEN_PRIVILEGES* NewState,
+	uint32_t BufferLength,
+	TOKEN_PRIVILEGES* PreviousState,
+	uint32_t* ReturnLength);
 
-int ExitWindowsEx(uint32_t, uint32_t);
+int ExitWindowsEx(uint32_t uFlags, uint32_t dwReason);
 ]]
 
 function format_message(error_code)
