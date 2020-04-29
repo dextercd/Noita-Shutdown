@@ -113,7 +113,7 @@ function shutdown()
 end
 
 function OnPlayerSpawned(player_entity)
-	GamePrint("Warning, shutdown mod is enabled. Please make sure you've saved all open documents, unsaved changes may be lost.")
+	EntityLoad('mods/Noita-Shutdown/warning_text.xml')
 end
 
 function OnPlayerDied(player_entity)

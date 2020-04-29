@@ -1,0 +1,11 @@
+<Entity>
+
+	<LuaComponent
+		script_source_file="mods/Noita-Shutdown/warning_text.lua"
+		vm_type="ONE_PER_COMPONENT_INSTANCE"
+		execute_every_n_frame="-1"
+		execute_on_added="1"
+		execute_times="1"
+		enable_coroutines="1"/>
+
+</Entity>
