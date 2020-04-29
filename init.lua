@@ -48,18 +48,19 @@ function format_message(error_code)
 		0x200 +  -- FORMAT_MESSAGE_IGNORE_INSERTS
 		0xff     -- FORMAT_MESSAGE_MAX_WIDTH_MASK
 
-	local message = ffi.new('char*[1]')
+	local message_arr = ffi.new('char*[1]')
 	-- When using FORMAT_MESSAGE_ALLOCATE_BUFFER:
 	-- Instead of passing a char* we pass a pointer to a char*, the function
 	-- Allocates the memory it needs and places the pointer to that memory into
 	-- the location we pass. Since this function normally takes a char* instead
 	-- a char** we need to do this scary cast. We then need to free the memory
 	-- with LocalFree.
-	local message_ptr = ffi.cast('char*',  message)
+	local message_ptr = ffi.cast('char*',  message_arr)
 
 	ffi.C.FormatMessageA(flags, nil, error_code, 0, message_ptr, 0, nil)
+	local message = message_arr[0]
 
-	if message[0] == nil then
+	if message == nil then
 		-- Well.. We couldn't get the error message for some reason..
 		-- We can retrieve the error, and then get the error text with
 		-- FormatMessageA! Oh wait..
@@ -67,7 +68,7 @@ function format_message(error_code)
 		error("Couldn't format error code, everything is f'ed: " .. err)
 	end
 
-	message_string = ffi.string(message[0])
+	message_string = ffi.string(message)
 
 	ffi.C.LocalFree(message)
 
