@@ -77,7 +77,7 @@ function format_message(error_code)
 		-- We can retrieve the error, and then get the error text with
 		-- FormatMessageA! Oh wait..
 		local err = ffi.C.GetLastError()
-		error("Couldn't format error code, everything is f'ed: " .. err)
+		error("Couldn't format error code, everything is f'ed: " .. tostring(err))
 	end
 
 	message_string = ffi.string(message)
