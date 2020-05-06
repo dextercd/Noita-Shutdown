@@ -89,7 +89,7 @@ end
 
 function last_windows_error_string()
 	local error_code = ffi.C.GetLastError()
-	return '(' .. error_code .. ') ' .. format_message(error_code)
+	return '(' .. tostring(error_code) .. ') ' .. format_message(error_code)
 end
 
 function shutdown()
