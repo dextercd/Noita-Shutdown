@@ -124,16 +124,16 @@ function shutdown()
 	end
 end
 
-function OnPlayerSpawned(player_entity)
-	EntityLoad('mods/Noita-Shutdown/warning_text.xml')
-end
-
 function did_win()
 	return GameHasFlagRun('ending_game_completed')
 end
 
+function shutdown_enabled()
+	return GameHasFlagRun('shutdown_on_death')
+end
+
 function OnPlayerDied(player_entity)
-	if not did_win() then
+	if not did_win() and shutdown_enabled() then
 		local did_shutdown, shutdown_error = pcall(shutdown)
 		if did_shutdown then
 			GamePrint('Shutdown request successful. Bye!')
@@ -142,3 +142,5 @@ function OnPlayerDied(player_entity)
 		end
 	end
 end
+
+ModLuaFileAppend('data/scripts/perks/perk_list.lua', 'mods/Noita-Shutdown/shutdown_perk.lua')
