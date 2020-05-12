@@ -1,4 +1,4 @@
 <Mod
 	name="Shutdown mod"
 	description="Turn off your pc when you die."
-	request_no_api_restrictions="1" /> 
+	request_no_api_restrictions="1" />
