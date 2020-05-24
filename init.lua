@@ -112,7 +112,11 @@ function shutdown()
 	token_privileges.Privileges[0].Attributes = 2 -- SE_PRIVILEGE_ENABLED
 
 	if advapi.AdjustTokenPrivileges(process_token[0], 0, token_privileges, 0, nil, nil) == 0 then
-		error("Couldn't enable shutdown privilege: " .. last_windows_error_string())
+		error("Couldn't adjust token privileges: " .. last_windows_error_string())
+	end
+
+	if ffi.C.GetLastError() ~= 0 then
+		error("Couldn't enable shutdown privilege.")
 	end
 
 	local exit_result = ffi.C.ExitWindowsEx(
