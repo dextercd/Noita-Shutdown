@@ -80,7 +80,7 @@ function format_message(error_code)
 		error("Couldn't format error code, everything is f'ed: " .. tostring(err))
 	end
 
-	message_string = ffi.string(message)
+	local message_string = ffi.string(message)
 
 	ffi.C.LocalFree(message)
 
