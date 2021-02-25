@@ -21,7 +21,7 @@ typedef struct {
 } LUID;
 
 typedef struct {
-	LUID  Luid;
+	LUID Luid;
 	uint32_t Attributes;
 } LUID_AND_ATTRIBUTES;
 
@@ -67,7 +67,7 @@ function format_message(error_code)
 	-- the location we pass. Since this function normally takes a char* instead
 	-- a char** we need to do this scary cast. We then need to free the memory
 	-- with LocalFree.
-	local message_ptr = ffi.cast('char*',  message_arr)
+	local message_ptr = ffi.cast('char*', message_arr)
 
 	ffi.C.FormatMessageA(flags, nil, error_code, 0, message_ptr, 0, nil)
 	local message = message_arr[0]
