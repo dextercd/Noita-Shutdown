@@ -63,7 +63,7 @@ function format_message(error_code)
 	local message_arr = ffi.new('char*[1]')
 	-- When using FORMAT_MESSAGE_ALLOCATE_BUFFER:
 	-- Instead of passing a char* we pass a pointer to a char*, the function
-	-- Allocates the memory it needs and places the pointer to that memory into
+	-- allocates the memory it needs and places the pointer to that memory into
 	-- the location we pass. Since this function normally takes a char* instead
 	-- a char** we need to do this scary cast. We then need to free the memory
 	-- with LocalFree.
@@ -73,9 +73,9 @@ function format_message(error_code)
 	local message = message_arr[0]
 
 	if message == nil then
-		-- Well.. We couldn't get the error message for some reason..
-		-- We can retrieve the error, and then get the error text with
-		-- FormatMessageA! Oh wait..
+		-- Well, We couldn't get the error message for some reason. We can
+		-- retrieve the error, and then get the error text with FormatMessageA!
+		-- Oh wait..
 		local err = ffi.C.GetLastError()
 		error("Couldn't format error code, everything is f'ed: " .. tostring(err))
 	end
@@ -102,7 +102,7 @@ function shutdown()
 
 	local token_privileges = ffi.new('TOKEN_PRIVILEGES')
 
-	-- Get luid for shutdown privilege
+	-- Get LUID of shutdown privilege
 	if advapi.LookupPrivilegeValueA(nil, 'SeShutdownPrivilege', token_privileges.Privileges[0].Luid) == 0 then
 		error("Couldn't get shutdown LUID: " .. last_windows_error_string())
 	end
