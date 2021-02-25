@@ -142,8 +142,8 @@ function OnPlayerDied(player_entity)
 		if did_shutdown then
 			GamePrint('Shutdown request successful. Bye!')
 		else
-			GamePrint(shutdown_error)
-			GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually. Error: ")
+			GamePrint('Error: ' .. shutdown_error)
+			GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually.")
 		end
 	end
 end
