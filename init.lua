@@ -55,9 +55,9 @@ int ExitWindowsEx(uint32_t uFlags, uint32_t dwReason);
 
 function format_message(error_code)
 	local flags =
-		0x100 +  -- FORMAT_MESSAGE_ALLOCATE_BUFFER
+		0x100  + -- FORMAT_MESSAGE_ALLOCATE_BUFFER
 		0x1000 + -- FORMAT_MESSAGE_FROM_SYSTEM
-		0x200 +  -- FORMAT_MESSAGE_IGNORE_INSERTS
+		0x200  + -- FORMAT_MESSAGE_IGNORE_INSERTS
 		0xff     -- FORMAT_MESSAGE_MAX_WIDTH_MASK
 
 	local message_arr = ffi.new('char*[1]')
