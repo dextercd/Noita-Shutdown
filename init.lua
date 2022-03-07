@@ -1,4 +1,7 @@
+ModLuaFileAppend('data/scripts/perks/perk_list.lua', 'mods/shutdown/shutdown_perk.lua')
+
 local ffi = require 'ffi'
+dofile_once("data/scripts/perks/perk.lua")
 
 ffi.cdef[[
 uint32_t GetLastError(void);
@@ -137,6 +140,15 @@ function shutdown_enabled()
 end
 
 
+function OnPlayerSpawned(player_entity)
+    if ModSettingGet('shutdown.shutdown_perk') == 'no_perk' then
+        local x, y = EntityGetTransform(player_entity)
+        local perk = perk_spawn(x, y, 'SHUTDOWN')
+        perk_pickup(perk, player_entity, EntityGetName(perk), false, false)
+    end
+end
+
+
 function OnPlayerDied(player_entity)
     if not did_win() and shutdown_enabled() then
         local did_shutdown, shutdown_error = pcall(shutdown)
@@ -148,5 +160,3 @@ function OnPlayerDied(player_entity)
         end
     end
 end
-
-ModLuaFileAppend('data/scripts/perks/perk_list.lua', 'mods/shutdown/shutdown_perk.lua')
