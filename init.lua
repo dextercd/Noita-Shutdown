@@ -141,6 +141,11 @@ end
 
 
 function OnPlayerSpawned(player_entity)
+    if GameHasFlagRun('shutdown_initialised') then
+        return
+    end
+    GameAddFlagRun('shutdown_initialised')
+
     if ModSettingGet('shutdown.shutdown_perk') == 'no_perk' then
         local x, y = EntityGetTransform(player_entity)
         local perk = perk_spawn(x, y, 'SHUTDOWN')
