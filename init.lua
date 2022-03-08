@@ -1,4 +1,6 @@
-ModLuaFileAppend('data/scripts/perks/perk_list.lua', 'mods/shutdown/shutdown_perk.lua')
+ModLuaFileAppend(
+    'data/scripts/perks/perk_list.lua',
+    'mods/shutdown/files/scripts/perks/pl_shutdown_perk.lua')
 
 local ffi = require 'ffi'
 dofile_once("data/scripts/perks/perk.lua")
