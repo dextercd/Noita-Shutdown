@@ -12,5 +12,19 @@ table.insert(perk_list,
 
             GameAddFlagRun('shutdown_on_death')
             GameAddFlagRun('shutdown_reason_perk')
+
+            local damage_model = EntityGetFirstComponentIncludingDisabled(
+                    entity_who_picked, 'DamageModelComponent')
+
+            -- Delay OnPlayerDied until the kill_now flag is set by bsod.lua
+            ComponentSetValue2(damage_model, 'wait_for_kill_flag_on_death', true)
+
+            EntityAddComponent2(entity_who_picked, 'LuaComponent', {
+                script_source_file = "mods/shutdown/files/scripts/perks/shutdown.lua",
+                enable_coroutines = true,
+                execute_every_n_frame = -1,
+                execute_on_added = true,
+                execute_times = 1,
+            })
         end,
     })
