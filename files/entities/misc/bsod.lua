@@ -3,8 +3,13 @@ dofile("data/scripts/lib/coroutines.lua")
 local entity_id = GetUpdatedEntityID()
 local children = EntityGetAllChildren(entity_id)
 local completed = children[2]
+local stop_code = children[3]
+
 local completed_sprite = EntityGetFirstComponentIncludingDisabled(
         completed, 'SpriteComponent')
+
+local stop_code_sprite = EntityGetFirstComponentIncludingDisabled(
+        stop_code, 'SpriteComponent')
 
 local player_id = EntityGetWithTag( "player_unit" )[1]
 local damage_model = EntityGetFirstComponentIncludingDisabled(
@@ -18,6 +23,12 @@ function animate_completed()
         wait(wait_time)
     end
 end
+
+function select_stop_code()
+    ComponentSetValue2(stop_code_sprite, 'rect_animation', tostring(Random(7)))
+end
+
+select_stop_code()
 
 async(function()
     animate_completed()

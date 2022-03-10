@@ -20,9 +20,29 @@ add_custom_target(completed ALL
         completed.xml
 )
 
+add_custom_command(
+    OUTPUT stop_code.png stop_code.xml
+    DEPENDS generate_stop_code.py ${SHUTDOWN_BSOD_FONT}
+
+    VERBATIM
+    COMMAND Python3::Interpreter
+        ${CMAKE_CURRENT_SOURCE_DIR}/generate_stop_code.py
+        --font ${SHUTDOWN_BSOD_FONT}
+        --image-out stop_code.png
+        --sprite-xml-out stop_code.xml
+)
+
+add_custom_target(stop_code ALL
+    DEPENDS
+        stop_code.png
+        stop_code.xml
+)
+
 install(
     FILES
         ${CMAKE_CURRENT_BINARY_DIR}/completed.png
         ${CMAKE_CURRENT_BINARY_DIR}/completed.xml
+        ${CMAKE_CURRENT_BINARY_DIR}/stop_code.png
+        ${CMAKE_CURRENT_BINARY_DIR}/stop_code.xml
     DESTINATION "shutdown/files/ui_gfx/bluescreen"
 )

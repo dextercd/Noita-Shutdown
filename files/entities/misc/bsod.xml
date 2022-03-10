@@ -33,4 +33,19 @@
         </SpriteComponent>
     </Entity>
 
+    <Entity>
+        <InheritTransformComponent>
+            <Transform
+                position.x="418"
+                position.y="802" >
+            </Transform>
+        </InheritTransformComponent>
+
+        <SpriteComponent
+            image_file="mods/shutdown/files/ui_gfx/bluescreen/stop_code.xml"
+            ui_is_parent="1"
+            z_index="-20000" >
+        </SpriteComponent>
+    </Entity>
+
 </Entity>
