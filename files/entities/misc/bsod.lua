@@ -28,16 +28,16 @@ function animate_completed()
     end
 end
 
-function select_stop_code()
-    ComponentSetValue2(stop_code_sprite, 'rect_animation', tostring(Random(7)))
+function random_animation(sprite_component, max_anim_number)
+    ComponentSetValue2(
+        sprite_component,
+        'rect_animation',
+        tostring(Random(max_anim_number))
+    )
 end
 
-function select_qr_code()
-    ComponentSetValue2(qr_code_sprite, 'rect_animation', tostring(Random(9)))
-end
-
-select_stop_code()
-select_qr_code()
+random_animation(stop_code_sprite, 7)
+random_animation(qr_code_sprite, 9)
 
 async(function()
     animate_completed()
