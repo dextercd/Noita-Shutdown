@@ -20,7 +20,7 @@ local damage_model = EntityGetFirstComponentIncludingDisabled(
         player_id, 'DamageModelComponent')
 
 function animate_completed()
-    local wait_times = {20, 4, 17, 60, 50, 10, 12, 10, 3, 60, 6, 70, 130}
+    local wait_times = {20, 14, 17, 60, 50, 30, 22, 15, 33, 60, 20, 70, 130}
     for index, wait_time in ipairs(wait_times) do
         local animation_name = tostring(index - 1)
         ComponentSetValue2(completed_sprite, 'rect_animation', animation_name)
