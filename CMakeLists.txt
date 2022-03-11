@@ -34,5 +34,6 @@ install(CODE "
     )
 ")
 
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 set(CPACK_VERBATIM_VARIABLES YES)
 include(CPack)
