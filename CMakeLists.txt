@@ -20,4 +20,14 @@ install(
 
 add_subdirectory(bluescreen)
 
+find_program(OPTIPNG NAMES optipng REQUIRED)
+
+install(CODE "
+    execute_process(
+        COMMAND find \"\${CMAKE_INSTALL_PREFIX}/shutdown\" -name *.png -exec
+            \"${OPTIPNG}\" -o3 -strip all
+            -- {} +
+    )
+")
+
 include(CPack)
