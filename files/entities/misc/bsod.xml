@@ -28,8 +28,7 @@
         <SpriteComponent
             image_file="mods/shutdown/files/ui_gfx/bluescreen/completed.xml"
             ui_is_parent="1"
-            z_index="-20000"
-            rect_animation="0" >
+            z_index="-20000" >
         </SpriteComponent>
     </Entity>
 

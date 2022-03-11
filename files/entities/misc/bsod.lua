@@ -32,7 +32,7 @@ function random_animation(sprite_component, max_anim_number)
     ComponentSetValue2(
         sprite_component,
         'rect_animation',
-        tostring(Random(max_anim_number))
+        tostring(Random(max_anim_number - 1))
     )
 end
 
