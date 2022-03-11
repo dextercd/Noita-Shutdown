@@ -30,4 +30,5 @@ install(CODE "
     )
 ")
 
+set(CPACK_VERBATIM_VARIABLES YES)
 include(CPack)
