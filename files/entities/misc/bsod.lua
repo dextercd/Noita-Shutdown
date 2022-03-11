@@ -2,9 +2,9 @@ dofile("data/scripts/lib/coroutines.lua")
 
 local entity_id = GetUpdatedEntityID()
 local children = EntityGetAllChildren(entity_id)
-local completed = children[2]
-local qr_code = children[3]
-local stop_code = children[4]
+local completed = children[3]
+local qr_code = children[4]
+local stop_code = children[5]
 
 local completed_sprite = EntityGetFirstComponentIncludingDisabled(
         completed, 'SpriteComponent')

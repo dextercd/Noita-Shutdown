@@ -8,6 +8,22 @@
 
     <Entity>
         <InheritTransformComponent>
+            <Transform
+                scale.x="1000"
+                scale.y="1000"
+            >
+            </Transform>
+        </InheritTransformComponent>
+
+        <SpriteComponent
+            image_file="mods/shutdown/files/ui_gfx/bluescreen/background.xml"
+            ui_is_parent="1"
+            z_index="-20000" >
+        </SpriteComponent>
+    </Entity>
+
+    <Entity>
+        <InheritTransformComponent>
         </InheritTransformComponent>
 
         <SpriteComponent
