@@ -19,7 +19,7 @@ local qr_code_sprite = EntityGetFirstComponentIncludingDisabled(
 local stop_code_sprite = EntityGetFirstComponentIncludingDisabled(
         stop_code, 'SpriteComponent')
 
-local player_id = EntityGetWithTag( "player_unit" )[1]
+local player_id = EntityGetWithTag("player_unit")[1]
 local damage_model = EntityGetFirstComponentIncludingDisabled(
         player_id, 'DamageModelComponent')
 
