@@ -24,9 +24,13 @@ find_program(OPTIPNG NAMES optipng REQUIRED)
 
 install(CODE "
     execute_process(
-        COMMAND find \"\${CMAKE_INSTALL_PREFIX}/shutdown\" -name *.png -exec
-            \"${OPTIPNG}\" -o3 -strip all
-            -- {} +
+        COMMAND find \"\${CMAKE_INSTALL_PREFIX}/shutdown\" -type f -name *.png
+            -exec \"${OPTIPNG}\" -o3 -strip all -- {} +
+    )
+
+    execute_process(
+        COMMAND find \"\${CMAKE_INSTALL_PREFIX}/shutdown\"
+            -exec touch \"--date=2020-04-28T8:30\" -- {} +
     )
 ")
 
