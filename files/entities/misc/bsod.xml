@@ -29,6 +29,7 @@
         <SpriteComponent
             image_file="mods/shutdown/files/ui_gfx/bluescreen/static.xml"
             ui_is_parent="1"
+            visible="0"
             z_index="-20000" >
         </SpriteComponent>
     </Entity>
@@ -44,6 +45,8 @@
         <SpriteComponent
             image_file="mods/shutdown/files/ui_gfx/bluescreen/completed.xml"
             ui_is_parent="1"
+            visible="0"
+            rect_animation="0"
             z_index="-20000" >
         </SpriteComponent>
     </Entity>
@@ -59,6 +62,8 @@
         <SpriteComponent
             image_file="mods/shutdown/files/ui_gfx/bluescreen/qr_code.xml"
             ui_is_parent="1"
+            visible="0"
+            rect_animation="0"
             z_index="-20000" >
         </SpriteComponent>
     </Entity>
@@ -74,6 +79,8 @@
         <SpriteComponent
             image_file="mods/shutdown/files/ui_gfx/bluescreen/stop_code.xml"
             ui_is_parent="1"
+            visible="0"
+            rect_animation="0"
             z_index="-20000" >
         </SpriteComponent>
     </Entity>

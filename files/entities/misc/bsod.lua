@@ -2,9 +2,13 @@ dofile("data/scripts/lib/coroutines.lua")
 
 local entity_id = GetUpdatedEntityID()
 local children = EntityGetAllChildren(entity_id)
+local static = children[2]
 local completed = children[3]
 local qr_code = children[4]
 local stop_code = children[5]
+
+local static_sprite = EntityGetFirstComponentIncludingDisabled(
+        static, 'SpriteComponent')
 
 local completed_sprite = EntityGetFirstComponentIncludingDisabled(
         completed, 'SpriteComponent')
@@ -36,10 +40,30 @@ function random_animation(sprite_component, max_anim_number)
     )
 end
 
+function set_visible(sprite_component, visible)
+    if visible == nil then
+        visible = true
+    end
+
+    ComponentSetValue2(sprite_component, 'visible', visible)
+end
+
 random_animation(stop_code_sprite, 7)
 random_animation(qr_code_sprite, 9)
 
 async(function()
+    wait(5)
+    set_visible(qr_code_sprite)
+
+    wait(10)
+    set_visible(static_sprite)
+
+    wait(15)
+    set_visible(stop_code_sprite)
+
+    wait(40)
+    set_visible(completed_sprite)
+
     animate_completed()
     ComponentSetValue2(damage_model, 'kill_now', true)
 end)
