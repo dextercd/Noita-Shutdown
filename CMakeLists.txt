@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(NoitaShutdown LANGUAGES)
+project(NoitaShutdown
+    VERSION 2.0.0
+    LANGUAGES
+)
 
 find_package(Python3 3.10 REQUIRED Interpreter)
 
@@ -36,4 +39,5 @@ install(CODE "
 
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 set(CPACK_VERBATIM_VARIABLES YES)
+set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
 include(CPack)
