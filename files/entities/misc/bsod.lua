@@ -65,5 +65,7 @@ async(function()
     set_visible(completed_sprite)
 
     animate_completed()
+
+    GameAddFlagRun('shutdown_on_death')
     ComponentSetValue2(damage_model, 'kill_now', true)
 end)
