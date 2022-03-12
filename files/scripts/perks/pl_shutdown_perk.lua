@@ -10,12 +10,6 @@ table.insert(perk_list,
         func = function(entity_perk_item, entity_who_picked, item_name)
             EntityLoad('mods/shutdown/files/entities/misc/warning_text.xml')
 
-            local damage_model = EntityGetFirstComponentIncludingDisabled(
-                    entity_who_picked, 'DamageModelComponent')
-
-            -- Delay OnPlayerDied until the kill_now flag is set by bsod.lua
-            ComponentSetValue2(damage_model, 'wait_for_kill_flag_on_death', true)
-
             EntityAddComponent2(entity_who_picked, 'LuaComponent', {
                 script_source_file = "mods/shutdown/files/scripts/perks/shutdown.lua",
                 enable_coroutines = true,

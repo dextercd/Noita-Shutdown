@@ -4,6 +4,9 @@ local entity_id = GetUpdatedEntityID()
 local damage_model = EntityGetFirstComponentIncludingDisabled(
         entity_id, 'DamageModelComponent')
 
+-- Delay OnPlayerDied until the kill_now flag is
+ComponentSetValue2(damage_model, 'wait_for_kill_flag_on_death', true)
+
 function is_dead()
     local hp = ComponentGetValue2(damage_model, 'hp')
     return hp <= 0
@@ -26,6 +29,9 @@ async(function()
         wait(1)
     end
     if not GameHasFlagRun('ending_game_completed') then
+        -- kill_now will be set by bsod.lua
         shutdown_sequence()
+    else
+        ComponentSetValue2(damage_model, 'kill_now', true)
     end
 end)
