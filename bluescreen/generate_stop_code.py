@@ -15,7 +15,7 @@ sprite_out = args.sprite_xml_out
 
 transparent = (255, 255, 255, 0)
 white = (255, 255, 255, 255)
-text_width = 200
+text_width = 220
 text_height = 16
 
 texts = [
@@ -25,8 +25,10 @@ texts = [
     "U_SUCK_LOL",
     "CRITICAL_BAD_AT_GAME",
     "HEALTH_REACHED_ZERO",
+    "MINIMUM_HEALTH_EXCEEDED",
     "YOU_FUCKING_DIED",
     "OUT_OF_SKILL_ERROR",
+    "INVALID_SKILL_VALUE",
 ]
 
 image_size = (text_width, text_height * len(texts))

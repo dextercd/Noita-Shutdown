@@ -26,7 +26,8 @@ texts = [
     "How many QR code messages are there? 🤔",
     "silmä-huone channel is full of smart code breakers",
     "🇺🇦🇺🇦🇺🇦🇺🇦🇺🇦",
-    "Thanks for trying the mod!"
+    "Thanks for trying the mod!",
+    "Your computer should now turn off >:)",
 ]
 
 image = Image.new(mode="RGBA", size=(qr_width, qr_width * len(texts)), color=white)

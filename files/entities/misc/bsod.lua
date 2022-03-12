@@ -48,8 +48,8 @@ function set_visible(sprite_component, visible)
     ComponentSetValue2(sprite_component, 'visible', visible)
 end
 
-random_animation(stop_code_sprite, 7)
-random_animation(qr_code_sprite, 9)
+random_animation(stop_code_sprite, 10)
+random_animation(qr_code_sprite, 10)
 
 async(function()
     wait(5)
