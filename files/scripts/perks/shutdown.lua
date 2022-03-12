@@ -25,6 +25,7 @@ async(function()
     while not is_dead() do
         wait(1)
     end
-
-    shutdown_sequence()
+    if not GameHasFlagRun('ending_game_completed') then
+        shutdown_sequence()
+    end
 end)
