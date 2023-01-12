@@ -49,7 +49,7 @@ function set_visible(sprite_component, visible)
 end
 
 random_animation(stop_code_sprite, 10)
-random_animation(qr_code_sprite, 10)
+random_animation(qr_code_sprite, 12)
 
 async(function()
     wait(5)

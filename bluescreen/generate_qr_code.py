@@ -28,6 +28,8 @@ texts = [
     "🇺🇦🇺🇦🇺🇦🇺🇦🇺🇦",
     "Thanks for trying the mod!",
     "Your computer should now turn off >:)",
+    "https://noitagame.com/for_the_seekers_of_truest_of_knowledge/",
+    "Use https://noita.wiki.gg/ don't use the fandom wiki!",
 ]
 
 image = Image.new(mode="RGBA", size=(qr_width, qr_width * len(texts)), color=white)
