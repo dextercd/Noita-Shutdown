@@ -1,4 +1,4 @@
-<Entity>
+<Entity name="bsod">
     <LuaComponent
         script_source_file="mods/shutdown/files/entities/misc/bsod.lua"
         enable_coroutines="1"
@@ -6,7 +6,7 @@
         execute_on_added="1" >
     </LuaComponent>
 
-    <Entity>
+    <Entity name="bsod_background">
         <InheritTransformComponent>
             <Transform
                 scale.x="1000"
@@ -22,7 +22,7 @@
         </SpriteComponent>
     </Entity>
 
-    <Entity>
+    <Entity name="bsod_static">
         <InheritTransformComponent>
         </InheritTransformComponent>
 
@@ -34,7 +34,7 @@
         </SpriteComponent>
     </Entity>
 
-    <Entity>
+    <Entity name="bsod_completed">
         <InheritTransformComponent>
             <Transform
                 position.x="208"
@@ -51,7 +51,7 @@
         </SpriteComponent>
     </Entity>
 
-    <Entity>
+    <Entity name="bsod_qr">
         <InheritTransformComponent>
             <Transform
                 position.x="207"
@@ -68,7 +68,7 @@
         </SpriteComponent>
     </Entity>
 
-    <Entity>
+    <Entity name="bsod_stop_code">
         <InheritTransformComponent>
             <Transform
                 position.x="418"
