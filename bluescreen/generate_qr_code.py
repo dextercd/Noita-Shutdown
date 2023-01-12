@@ -65,10 +65,6 @@ if sprite_out:
         rect_anim.setAttribute("frame_width", str(qr_width))
         rect_anim.setAttribute("frame_height", str(qr_width))
 
-        # Prevent self-closing with empty text node
-        text_node = document.createTextNode("")
-        rect_anim.appendChild(text_node)
-
         sprite.appendChild(rect_anim)
 
     with open(sprite_out, "w") as out:
