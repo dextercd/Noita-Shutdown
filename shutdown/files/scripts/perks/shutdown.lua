@@ -18,7 +18,7 @@ function shutdown_sequence()
     local dummy_gui = GuiCreate()
     local screenx, screeny = GuiGetScreenDimensions(dummy_gui)
 
-    scale = screeny / 1080
+    local scale = screeny / 1080
 
     EntitySetTransform(bsod, 0, 0, nil, scale, scale)
     EntityApplyTransform(bsod, 0, 0, nil, scale, scale)
