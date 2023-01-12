@@ -9,16 +9,8 @@ find_package(Python3 3.10 REQUIRED Interpreter)
 
 set(CPACK_GENERATOR "ZIP" CACHE STRING "")
 
-install(DIRECTORY files
-    DESTINATION "shutdown"
-)
-
-install(
-    FILES
-        init.lua
-        mod.xml
-        settings.lua
-    DESTINATION "shutdown"
+install(DIRECTORY shutdown
+    DESTINATION "."
 )
 
 add_subdirectory(bluescreen)
