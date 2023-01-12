@@ -56,7 +56,18 @@ int AdjustTokenPrivileges(
     uint32_t* ReturnLength);
 
 int ExitWindowsEx(uint32_t uFlags, uint32_t dwReason);
+
+const char* wine_get_version();
 ]]
+
+function get_symbol(lib, symbol)
+    return lib[symbol]
+end
+
+function symbol_exists(lib, symbol)
+    local ok, value = pcall(get_symbol, lib, symbol)
+    return ok
+end
 
 function format_message(error_code)
     local flags =
@@ -97,7 +108,12 @@ function last_windows_error_string()
     return '(' .. tostring(error_code) .. ') ' .. format_message(error_code)
 end
 
-function shutdown()
+function linux_shutdown()
+    -- This is too easy. Feels like cheating :-(
+    os.execute("start /unix /usr/bin/shutdown +0")
+end
+
+function windows_shutdown()
     local advapi = ffi.load('advapi32')
 
     local process_token = ffi.new('void*[0]')
@@ -130,6 +146,14 @@ function shutdown()
 
     if exit_status == 0 then
         error('Shutdown request failed: ' .. last_windows_error_string())
+    end
+end
+
+function shutdown()
+    if symbol_exists(ffi.load("ntdll"), "wine_get_version") then
+        return linux_shutdown()
+    else
+        return windows_shutdown()
     end
 end
 
