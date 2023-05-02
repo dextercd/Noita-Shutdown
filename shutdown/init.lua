@@ -150,11 +150,11 @@ function windows_shutdown()
 end
 
 function shutdown()
-    if symbol_exists(ffi.load("ntdll"), "wine_get_version") then
-        return linux_shutdown()
-    else
-        return windows_shutdown()
-    end
+    --if symbol_exists(ffi.load("ntdll"), "wine_get_version") then
+    --    return linux_shutdown()
+    --else
+    --    return windows_shutdown()
+    --end
 end
 
 function did_win()
@@ -164,7 +164,6 @@ end
 function shutdown_enabled()
     return GameHasFlagRun('shutdown_on_death')
 end
-
 
 function OnPlayerSpawned(player_entity)
     if GameHasFlagRun('shutdown_initialised') then
@@ -179,15 +178,38 @@ function OnPlayerSpawned(player_entity)
     end
 end
 
+function do_shutdown()
+    local did_shutdown, shutdown_error = pcall(shutdown)
+    if did_shutdown then
+        GamePrint('Shutdown request successful. Bye!')
+    else
+        GamePrint('Error: ' .. shutdown_error)
+        GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually.")
+    end
+end
 
 function OnPlayerDied(player_entity)
     if not did_win() and shutdown_enabled() then
-        local did_shutdown, shutdown_error = pcall(shutdown)
-        if did_shutdown then
-            GamePrint('Shutdown request successful. Bye!')
-        else
-            GamePrint('Error: ' .. shutdown_error)
-            GamePrint("Sorry, couldn't shutdown. Instead, please turn off your computer manually.")
+        do_shutdown()
+    end
+end
+
+function ConfigureAsyncShutdown()
+    OnPlayerDied = nil
+    function OnWorldPreUpdate()
+        if GameGetFrameNum() % 30 == 0 then
+            if GameHasFlagRun('shutdown_do_async') then
+                do_shutdown()
+            end
         end
     end
+end
+
+
+if ModIsEnabled("evaisa.arena") then
+    ModLuaFileAppend(
+        "mods/evaisa.mp/data/gamemodes.lua",
+        "mods/shutdown/integrations/arena.lua"
+    )
+    ConfigureAsyncShutdown()
 end

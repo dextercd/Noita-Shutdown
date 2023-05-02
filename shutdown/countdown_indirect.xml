@@ -1,0 +1,7 @@
+<Entity>
+    <LuaComponent
+        script_source_file="mods/shutdown/countdown_indirect.lua"
+        execute_on_removed="1"
+        execute_every_n_frame="-1"
+        />
+</Entity>

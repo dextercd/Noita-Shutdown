@@ -1,0 +1,34 @@
+<Entity tags="free_camera_light">
+
+    <_Transform
+        scale.x="8"
+        scale.y="8"
+        />
+
+    <SpriteComponent
+        ui_is_parent="1"
+        is_text_sprite="1"
+        image_file="data/fonts/font_pixel_white.xml"
+        z_index="4"
+        offset_x="-9.300"
+        offset_y="-3.500"
+        text="n"
+        />
+
+    <SpriteComponent
+        ui_is_parent="1"
+        image_file="mods/shutdown/files/item_gfx/perks/shutdown.png"
+        offset_x="-10"
+        offset_y="-5.4"
+        />
+
+    <LifetimeComponent lifetime="240" />
+    <StreamingKeepAliveComponent />
+
+    <LuaComponent
+        script_source_file="mods/shutdown/countdown.lua"
+        execute_every_n_frame="30"
+        remove_after_executed="1"
+        />
+
+</Entity>
