@@ -150,11 +150,11 @@ function windows_shutdown()
 end
 
 function shutdown()
-    --if symbol_exists(ffi.load("ntdll"), "wine_get_version") then
-    --    return linux_shutdown()
-    --else
-    --    return windows_shutdown()
-    --end
+    if symbol_exists(ffi.load("ntdll"), "wine_get_version") then
+        return linux_shutdown()
+    else
+        return windows_shutdown()
+    end
 end
 
 function did_win()
